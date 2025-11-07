@@ -10,6 +10,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/feature" element={<Feature />} />
+        <Route path="/layanan" element={<Feature />} />
+
         {/* <Route path="/kontak" element={<Kontak />} /> */}
         {/* <Route path="/feature/:id" element={<FeatureDetail />} /> */}
         

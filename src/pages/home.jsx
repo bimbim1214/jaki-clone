@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Search, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import { servicesData, statsData, featureCategoriesData } from '../data/services';
@@ -19,64 +20,65 @@ const Home = () => {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
 
-      {/* Hero Section */}
+      {/* Hero Section (FULL SCREEN) */}
       <section
-        className="relative pt-24 pb-16 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/images/kantorbupati.jpg')",
-        }}
+        className="relative min-h-[96vh] flex items-center bg-cover bg-center bg-no-repeat pt-28"
+        style={{ backgroundImage: "url('/images/kantorbupati.jpg')" }}
       >
-        {/* FULLSCREEN OVERLAY */}
+        {/* Overlay gelap */}
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        {/* Fade ke section berikutnya */}
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-gray-50 to-transparent"></div>
 
         {/* Konten */}
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid md:grid-cols-2 gap-12 items-center text-white">
-            {/* Text */}
-            <div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg">
-                Portal Informasi Kabupaten Bantul
-              </h1>
+        <div className="relative w-full">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="grid md:grid-cols-2 gap-12 items-center text-white">
+              {/* Text */}
+              <div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg">
+                  Portal Informasi Kabupaten Bantul
+                </h1>
 
-              <p className="text-lg md:text-xl mb-8 text-gray-100 drop-shadow-md">
-                Akses mudah untuk berbagai layanan, informasi wisata, UMKM, dan berita terkini seputar Bantul
-              </p>
+                <p className="text-lg md:text-xl mb-8 text-gray-100 drop-shadow-md">
+                  Akses mudah untuk berbagai layanan, informasi wisata, UMKM, dan berita terkini seputar Bantul
+                </p>
 
-              {/* Search Bar */}
-              <div className="bg-white rounded-lg p-2 flex items-center shadow-xl">
-                <Search className="text-gray-400 ml-2" size={20} />
-
-                <input
-                  type="text"
-                  placeholder="Cari layanan, wisata, UMKM..."
-                  className="flex-1 px-4 py-3 outline-none text-gray-700"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                />
-
-                <button
-                  onClick={handleSearch}
-                  className="bg-emerald-600 text-white px-6 py-3 rounded-md hover:bg-emerald-700 transition"
-                >
-                  Cari
-                </button>
+                {/* Search Bar */}
+                <div className="bg-white rounded-lg p-2 flex items-center shadow-xl">
+                  <Search className="text-gray-400 ml-2" size={20} />
+                  <input
+                    type="text"
+                    placeholder="Cari layanan, wisata, UMKM..."
+                    className="flex-1 px-4 py-3 outline-none text-gray-700"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                  />
+                  <button
+                    onClick={handleSearch}
+                    className="bg-emerald-600 text-white px-6 py-3 rounded-md hover:bg-emerald-700 transition"
+                  >
+                    Cari
+                  </button>
+                </div>
               </div>
-            </div>
 
-            {/* Illustration */}
-            <div className="hidden md:flex justify-center">
-              <div className="overflow-hidden rounded-3xl shadow-xl w-[320px] h-[460px]">
-                <img
-                  src="/images/gambaratas.png"
-                  alt="Bantul Hero"
-                  className="w-full h-full object-cover"
-                />
+              {/* Illustration */}
+              <div className="hidden md:flex justify-center">
+                <div className="overflow-hidden rounded-3xl shadow-xl w-[320px] h-[460px]">
+                  <img
+                    src="/images/gambaratas.png"
+                    alt="Bantul Hero"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Statistics Section */}
       <section className="py-12 bg-white shadow-md">
@@ -130,8 +132,8 @@ const Home = () => {
                     {service.description}
                   </p>
 
-                  {/* Link */}
-                  <a 
+                  {/* Link (biarkan sesuai kebutuhanmu) */}
+                  <a
                     href={`/${service.slug}`}
                     className="inline-flex items-center text-teal-600 font-semibold text-sm hover:text-teal-700 transition-colors"
                   >
@@ -141,18 +143,18 @@ const Home = () => {
               ))}
             </div>
 
-            {/* Navigation Arrow - Bottom Right */}
+            {/* Button "Lihat Semua Layanan" menuju halaman layanan */}
             <div className="flex justify-end mt-8">
-              <button 
+              <Link
+                to="/layanan"
                 className="group flex items-center gap-2 bg-teal-600 text-white px-6 py-3 rounded-full hover:bg-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                onClick={() => window.location.href = '/semua-layanan'}
               >
                 <span className="font-semibold">Lihat Semua Layanan</span>
-                <ArrowRight 
-                  size={20} 
+                <ArrowRight
+                  size={20}
                   className="group-hover:translate-x-1 transition-transform duration-300"
                 />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -178,7 +180,7 @@ const Home = () => {
                 className="w-10 h-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center hover:bg-teal-200 transition"
                 onClick={() => {
                   const container = document.getElementById('categories-scroll');
-                  container.scrollBy({ left: -400, behavior: 'smooth' });
+                  container?.scrollBy({ left: -400, behavior: 'smooth' });
                 }}
               >
                 ←
@@ -187,7 +189,7 @@ const Home = () => {
                 className="w-10 h-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center hover:bg-teal-200 transition"
                 onClick={() => {
                   const container = document.getElementById('categories-scroll');
-                  container.scrollBy({ left: 400, behavior: 'smooth' });
+                  container?.scrollBy({ left: 400, behavior: 'smooth' });
                 }}
               >
                 →
@@ -298,9 +300,12 @@ const Home = () => {
                 BantulPedia siap bantu urusanmu di Bantul
               </h1>
               <p className="text-lg text-white/90">Satu portal untuk akses semua informasi. Simple dan cepat.</p>
-              <button className="px-8 py-3 bg-white text-teal-600 font-semibold rounded-xl hover:bg-gray-100 transition shadow-lg">
+              <Link
+                to="/layanan"
+                className="px-8 py-3 bg-white text-teal-600 font-semibold rounded-xl hover:bg-gray-100 transition shadow-lg inline-block"
+              >
                 Explore Layanan
-              </button>
+              </Link>
             </div>
 
             <div className="flex justify-center md:justify-end w-full">

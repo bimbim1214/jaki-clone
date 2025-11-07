@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const menuItems = [
     { name: 'Beranda', href: '/' },
-    { name: 'Layanan', href: '/feature' },
+    //{ name: 'Layanan', href: '/feature' },
     { name: 'Berita', href: '/berita' },
     { name: 'Tentang', href: '/tentang' },
     { name: 'Kontak', href: '/kontak' }

@@ -1,27 +1,40 @@
-import React from 'react';
-import { ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+// src/components/cardfeature.jsx
+import React from "react";
+import { Link } from "react-router-dom";
 
 const CardFeature = ({ service }) => {
   return (
-    <Link
-      to={`/feature/${service.id}`}
-      className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group hover:-translate-y-1"
+    <div
+      className="
+        bg-white rounded-2xl p-8 shadow-sm border border-gray-100 
+        hover:shadow-xl hover:-translate-y-2 transition-all duration-300 
+        cursor-pointer group
+      "
     >
-      <div className={`${service.color} w-16 h-16 rounded-lg flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform`}>
-        {service.icon}
+      {/* Icon Bulat */}
+      <div className="w-16 h-16 rounded-full bg-teal-50 flex items-center justify-center mb-6 ring-8 ring-teal-50/70">
+        <span className="text-3xl">{service.icon}</span>
       </div>
-      <h3 className="text-xl font-bold text-gray-800 mb-2">
+
+      {/* Judul */}
+      <h3 className="text-xl font-bold text-gray-900 mb-3">
         {service.title}
       </h3>
-      <p className="text-gray-600 mb-4">
+
+      {/* Deskripsi */}
+      <p className="text-gray-600 text-sm mb-6 leading-relaxed">
         {service.description}
       </p>
-      <div className="flex items-center text-blue-600 font-semibold group-hover:gap-2 transition-all">
-        Selengkapnya
-        <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
-      </div>
-    </Link>
+
+      {/* Tombol Selengkapnya */}
+      <Link
+        to={`/layanan?category=${service.slug}`}
+        className="inline-flex items-center text-teal-600 font-semibold text-sm hover:text-teal-700 transition-colors"
+      >
+        <span>Selengkapnya</span>
+        <span className="ml-1 transform transition-transform group-hover:translate-x-1">→</span>
+      </Link>
+    </div>
   );
 };
 
