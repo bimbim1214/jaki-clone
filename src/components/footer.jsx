@@ -19,21 +19,35 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="w-full px-8">
+
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10">
+
           {/* About */}
-          <div>
-            <div className="text-2xl font-bold mb-4">
-              Bantul<span className="text-green-400">Pedia</span>
+          <div className="col-span-2 md:col-span-2 lg:col-span-2">
+            <div className="flex items-center gap-3 mb-4">
+              {/* === Bagian Kiri: Logo dan Nama === */}
+              <Link to="/" className="flex items-center gap-2">
+                {/* Logo yang ditambahkan */}
+                <img 
+                  src="/images/logobantul1.png" // <-- GANTI DENGAN PATH LOGO ANDA
+                  alt="Logo BantulPedia" 
+                  className="h-8 w-8 object-contain" // Sesuaikan ukuran di sini
+                />
+                {/* Teks Nama */}
+                <span className="text-2xl font-bold">
+                  Bantul<span className="font-medium">Pedia</span>
+                </span>
+              </Link>
             </div>
-            <p className="text-gray-400">
-              Portal informasi terpadu untuk masyarakat Kabupaten Bantul
+            <p className="text-gray-400 leading-relaxed max-w-md">
+              Portal informasi terpadu untuk masyarakat Kabupaten Bantul.
             </p>
           </div>
 
-          {/* Links */}
+          {/* Services */}
           <div>
-            <h3 className="font-bold mb-4">Layanan</h3>
+            <h3 className="font-bold mb-4 text-lg">Layanan</h3>
             <ul className="space-y-2 text-gray-400">
               {services.map((service, index) => (
                 <li key={index}>
@@ -47,7 +61,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="font-bold mb-4">Kontak</h3>
+            <h3 className="font-bold mb-4 text-lg">Kontak</h3>
             <ul className="space-y-2 text-gray-400">
               <li className="flex items-center gap-2">
                 <MapPin size={16} />
@@ -66,7 +80,7 @@ const Footer = () => {
 
           {/* Social Media */}
           <div>
-            <h3 className="font-bold mb-4">Ikuti Kami</h3>
+            <h3 className="font-bold mb-4 text-lg">Ikuti Kami</h3>
             <div className="flex gap-4">
               {socialMedia.map((social, index) => (
                 <a
@@ -79,9 +93,10 @@ const Footer = () => {
               ))}
             </div>
           </div>
+
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+        <div className="border-t border-gray-800 mt-12 pt-6 text-center text-gray-400">
           <p>&copy; 2025 BantulPedia. All rights reserved.</p>
         </div>
       </div>
