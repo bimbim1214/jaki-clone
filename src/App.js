@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
 import Feature from './pages/feature';
 import CategoryPage from './pages/category';
+import News from './pages/news';
+import NewsDetail from './pages/news-detail';
 // import Kontak from './pages/kontak'; // Import ketika sudah dibuat
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
         <Route path="/feature" element={<Feature />} />
         <Route path="/layanan" element={<Feature />} />
         <Route path="/kategori/:slug" element={<CategoryPage />} />
+        <Route path="/berita" element={<News />} />
+        <Route path="/berita/:id" element={<NewsDetail />} />
         {/* <Route path="/kontak" element={<Kontak />} /> */}
         {/* <Route path="/feature/:id" element={<FeatureDetail />} /> */}
         
