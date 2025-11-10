@@ -79,6 +79,7 @@ export const featureCategoriesData = [
   {
     id: 1,
     title: 'Semua Layanan',
+    slug: 'semua',
     category: 'Semua Layanan',
     image: '/images/logobantul1.png',
     //gradient: 'from-teal-400 to-emerald-500',
@@ -95,6 +96,7 @@ export const featureCategoriesData = [
   {
     id: 2,
     title: 'Informasi Publik',
+    slug: 'informasi-publik',
     category: 'Informasi Publik',
     image: '/images/logobantul1.png',
     //gradient: 'from-blue-400 to-blue-600',
@@ -111,6 +113,7 @@ export const featureCategoriesData = [
   {
     id: 3,
     title: 'Layanan Publik',
+    slug: 'layanan-publik',
     category: 'Layanan Publik',
     image: '/images/logobantul1.png',
     //gradient: 'from-orange-400 to-orange-500',
@@ -127,6 +130,7 @@ export const featureCategoriesData = [
   {
     id: 4,
     title: 'Layanan Administrasi Pemerintah',
+    slug: 'administrasi-pemerintah',
     category: 'Administrasi Pemerintah',
     image: '/images/logobantul1.png',
     //gradient: 'from-purple-400 to-pink-500',

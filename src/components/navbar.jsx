@@ -28,6 +28,11 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center">
+             <img 
+                src="/images/logobantul1.png" // <-- GANTI DENGAN PATH LOGO ANDA
+                alt="Logo BantulPedia" 
+                className="h-9 w-9 object-contain" // Sesuaikan ukuran di sini
+              />
             <div className={`text-2xl md:text-3xl font-bold transition-colors ${scrolled ? 'text-blue-600' : 'text-white'}`}>
               Bantul<span className={scrolled ? 'text-green-600' : 'text-green-400'}>Pedia</span>
             </div>

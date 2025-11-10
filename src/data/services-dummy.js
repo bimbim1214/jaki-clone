@@ -1,34 +1,32 @@
 // src/data/services-dummy.js
 export const servicesData = [
-  // WISATA (1–5)
-  { id: 1,  title: 'Informasi Wisata', description: 'Destinasi favorit dan tips liburan di Bantul.', slug: 'wisata', icon: '🏝️' },
-  { id: 2,  title: 'Pantai Parangtritis', description: 'Info tiket, jam buka, dan fasilitas pantai.', slug: 'wisata', icon: '🌊' },
-  { id: 3,  title: 'Gua Selarong', description: 'Wisata sejarah dengan panorama alam yang asri.', slug: 'wisata', icon: '🪨' },
-  { id: 4,  title: 'Hutan Pinus Mangunan', description: 'Spot foto epik, track ringan, dan wahana gardu pandang.', slug: 'wisata', icon: '🌲' },
-  { id: 5,  title: 'Kebun Buah Mangunan', description: 'Negeri di atas awan—sunrise terbaik di Bantul!', slug: 'wisata', icon: '🍑' },
+  // ========= INFORMASI PUBLIK =========
+  { id: 1,  title: 'Berita & Artikel', description: 'Informasi terkini seputar Kabupaten Bantul.', slug: 'informasi-publik', icon: '📰' },
+  { id: 2,  title: 'Pengumuman Resmi', description: 'Siaran pers & pengumuman pemerintah daerah.', slug: 'informasi-publik', icon: '📢' },
+  { id: 3,  title: 'Data & Statistik', description: 'Data sektoral, statistik daerah dan infografik.', slug: 'informasi-publik', icon: '📊' },
+  { id: 4,  title: 'Agenda Kegiatan', description: 'Jadwal kegiatan pemerintahan & masyarakat.', slug: 'informasi-publik', icon: '🗓️' },
+  { id: 5,  title: 'Program Unggulan', description: 'Ringkasan program prioritas Pemkab Bantul.', slug: 'informasi-publik', icon: '⭐' },
+  { id: 6,  title: 'Panduan Layanan Online', description: 'Cara pakai portal, alur layanan, dan tips.', slug: 'informasi-publik', icon: '🧭' },
+  { id: 7,  title: 'FAQ & Pusat Bantuan', description: 'Pertanyaan umum dan kontak bantuan.', slug: 'informasi-publik', icon: '❓' },
+  { id: 8,  title: 'Publikasi Dokumen', description: 'Unduhan dokumen publik & arsip digital.', slug: 'informasi-publik', icon: '📁' },
 
-  // LAYANAN PUBLIK (6–9)
-  { id: 6,  title: 'Administrasi Kependudukan', description: 'Layanan KTP, KK, Akta Kelahiran, dan pindah domisili.', slug: 'layanan-publik', icon: '🪪' },
-  { id: 7,  title: 'Perizinan Usaha', description: 'Panduan OSS dan perizinan usaha mikro & menengah.', slug: 'layanan-publik', icon: '📄' },
-  { id: 8,  title: 'Pengaduan Warga', description: 'Sampaikan keluhan layanan publik secara online.', slug: 'layanan-publik', icon: '☎️' },
-  { id: 9,  title: 'Informasi Pajak Daerah', description: 'Bayar PBB & retribusi, cek jatuh tempo dan diskon.', slug: 'layanan-publik', icon: '💰' },
+  // ========= LAYANAN PUBLIK =========
+  { id: 9,  0: undefined, title: 'Administrasi Kependudukan', description: 'Layanan KTP, KK, Akta Kelahiran, pindah datang.', slug: 'layanan-publik', icon: '🪪' },
+  { id: 10, title: 'Perizinan Usaha', description: 'OSS, NIB, izin mikro & menengah serta panduan.', slug: 'layanan-publik', icon: '📄' },
+  { id: 11, title: 'Pengaduan Warga', description: 'Sampaikan keluhan terkait layanan publik.', slug: 'layanan-publik', icon: '☎️' },
+  { id: 12, title: 'Informasi Pajak Daerah', description: 'PBB, retribusi, jatuh tempo dan pembayaran.', slug: 'layanan-publik', icon: '💰' },
+  { id: 13, title: 'Layanan Kesehatan', description: 'Faskes, IGD, jadwal vaksin, dan rujukan.', slug: 'layanan-publik', icon: '🏥' },
+  { id: 14, title: 'Layanan Pendidikan', description: 'Beasiswa, PPDB, perpustakaan & literasi.', slug: 'layanan-publik', icon: '🎓' },
+  { id: 15, title: 'Transportasi Publik', description: 'Trayek, jadwal, dan layanan transportasi.', slug: 'layanan-publik', icon: '🚌' },
+  { id: 16, title: 'Keamanan & Ketertiban', description: 'Kontak darurat & informasi keamanan lingkungan.', slug: 'layanan-publik', icon: '🛡️' },
 
-  // UMKM (10–13)
-  { id: 10, title: 'UMKM Lokal', description: 'Temukan produk unggulan dan katalog UMKM Bantul.', slug: 'umkm', icon: '🛍️' },
-  { id: 11, title: 'Pelatihan UMKM', description: 'Jadwal pelatihan produksi, branding, dan ekspor.', slug: 'umkm', icon: '🧑‍🏫' },
-  { id: 12, title: 'Pembiayaan & KUR', description: 'Akses pendanaan KUR dan inkubasi bisnis.', slug: 'umkm', icon: '🏦' },
-  { id: 13, title: 'Marketplace Lokal', description: 'Toko daring untuk produk-produk Bantul.', slug: 'umkm', icon: '🛒' },
-
-  // BUDAYA (14–15)
-  { id: 14, title: 'Agenda Budaya', description: 'Jadwal pentas seni, upacara adat, dan pameran.', slug: 'budaya', icon: '🎭' },
-  { id: 15, title: 'Sanggar & Komunitas', description: 'Direktori sanggar tari, karawitan, dan kerajinan.', slug: 'budaya', icon: '🪘' },
-
-  // PENDIDIKAN (16–18)
-  { id: 16, title: 'Beasiswa & Bantuan', description: 'Info beasiswa pelajar/mahasiswa dan syaratnya.', slug: 'pendidikan', icon: '🎓' },
-  { id: 17, title: 'Kelas Digital', description: 'Pelatihan literasi digital & coding dasar.', slug: 'pendidikan', icon: '💻' },
-  { id: 18, title: 'Perpustakaan Daerah', description: 'Keanggotaan, koleksi digital, dan jadwal layanan.', slug: 'pendidikan', icon: '📚' },
-
-  // KESEHATAN (19–20)
-  { id: 19, title: 'Fasilitas Kesehatan', description: 'Puskesmas, RS rujukan, dan layanan darurat.', slug: 'kesehatan', icon: '🏥' },
-  { id: 20, title: 'Jadwal Vaksin & Posyandu', description: 'Lokasi, jadwal, dan pendaftaran online.', slug: 'kesehatan', icon: '💉' },
+  // ========= ADMINISTRASI PEMERINTAH =========
+  { id: 17, title: 'Surat Keterangan', description: 'Pengajuan dan verifikasi surat keterangan resmi.', slug: 'administrasi-pemerintah', icon: '✉️' },
+  { id: 18, title: 'Legalisir Dokumen', description: 'Legalisasi ijazah, akta, dan dokumen lainnya.', slug: 'administrasi-pemerintah', icon: '✅' },
+  { id: 19, title: 'Pengadaan Barang/Jasa', description: 'Informasi LPSE dan proses pengadaan.', slug: 'administrasi-pemerintah', icon: '🛒' },
+  { id: 20, title: 'Permohonan Informasi (PPID)', description: 'Akses informasi publik melalui PPID.', slug: 'administrasi-pemerintah', icon: '🗂️' },
+  { id: 21, title: 'Laporan Kinerja', description: 'AKIP, IKU, SAKIP & laporan kinerja perangkat.', slug: 'administrasi-pemerintah', icon: '📈' },
+  { id: 22, title: 'Standar Operasional Prosedur', description: 'SOP layanan antar perangkat/OPD.', slug: 'administrasi-pemerintah', icon: '📘' },
+  { id: 23, title: 'Jadwal Pelayanan', description: 'Jam operasional dan loket layanan.', slug: 'administrasi-pemerintah', icon: '⏰' },
+  { id: 24, title: 'Formulir & Template', description: 'Unduhan blangko dan format permohonan.', slug: 'administrasi-pemerintah', icon: '📝' },
 ];

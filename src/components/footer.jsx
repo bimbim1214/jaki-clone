@@ -32,11 +32,11 @@ const Footer = () => {
                 <img 
                   src="/images/logobantul1.png" // <-- GANTI DENGAN PATH LOGO ANDA
                   alt="Logo BantulPedia" 
-                  className="h-8 w-8 object-contain" // Sesuaikan ukuran di sini
+                  className="h-9 w-9 object-contain" // Sesuaikan ukuran di sini
                 />
                 {/* Teks Nama */}
                 <span className="text-2xl font-bold">
-                  Bantul<span className="font-medium">Pedia</span>
+                  Bantul<span className="font-bold text-green-600">Pedia</span>
                 </span>
               </Link>
             </div>

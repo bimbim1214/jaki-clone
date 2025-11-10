@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
 import Feature from './pages/feature';
+import CategoryPage from './pages/category';
 // import Kontak from './pages/kontak'; // Import ketika sudah dibuat
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/feature" element={<Feature />} />
         <Route path="/layanan" element={<Feature />} />
-
+        <Route path="/kategori/:slug" element={<CategoryPage />} />
         {/* <Route path="/kontak" element={<Kontak />} /> */}
         {/* <Route path="/feature/:id" element={<FeatureDetail />} /> */}
         

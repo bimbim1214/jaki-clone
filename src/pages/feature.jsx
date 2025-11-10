@@ -1,3 +1,4 @@
+// src/pages/feature.jsx
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Search, Filter, ListOrdered, Infinity as InfinityIcon } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
@@ -5,7 +6,6 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import CardFeature from '../components/cardfeature';
 import Pagination from '../components/Pagination';
-// GANTI ke dummy:
 import { servicesData } from '../data/services-dummy';
 
 const PAGE_SIZE = 8;
@@ -17,22 +17,23 @@ const Feature = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [loading, setLoading] = useState(false);
 
-  // mode: 'pagination' | 'infinite'
+  // 'pagination' | 'infinite'
   const [mode, setMode] = useState('pagination');
   const [page, setPage] = useState(1);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const [searchParams] = useSearchParams();
 
-  // ===== Filter function (memoized) =====
+  // ===== Filter function =====
   const filterServices = useCallback((query, category) => {
     let filtered = services;
 
     if (query) {
+      const q = query.toLowerCase();
       filtered = filtered.filter(
         (s) =>
-          s.title.toLowerCase().includes(query.toLowerCase()) ||
-          s.description.toLowerCase().includes(query.toLowerCase())
+          s.title.toLowerCase().includes(q) ||
+          s.description.toLowerCase().includes(q)
       );
     }
 
@@ -56,10 +57,10 @@ const Feature = () => {
     }
   };
 
-  // ===== Apply query param after data loaded =====
+  // ===== Apply query param =====
   useEffect(() => {
-    const qpCategory = searchParams.get('category'); // ex: ?category=umkm
-    const qpQuery = searchParams.get('q');           // ex: ?q=pelatihan
+    const qpCategory = searchParams.get('category'); // ex: ?category=layanan-publik
+    const qpQuery = searchParams.get('q');           // ex: ?q=izin
     if (qpCategory) {
       setSelectedCategory(qpCategory);
       filterServices(qpQuery ?? '', qpCategory);
@@ -68,7 +69,6 @@ const Feature = () => {
       setSearchQuery(qpQuery);
       filterServices(qpQuery, 'all');
     }
-    // reset pagination/infinite when filter changes from query
     setPage(1);
     setVisibleCount(PAGE_SIZE);
   }, [filterServices, searchParams, services]);
@@ -110,13 +110,13 @@ const Feature = () => {
   }, [filteredServices, page]);
 
   // ===== Derived (infinite) =====
-  const infiniteItems = useMemo(() => {
-    return filteredServices.slice(0, visibleCount);
-  }, [filteredServices, visibleCount]);
+  const infiniteItems = useMemo(
+    () => filteredServices.slice(0, visibleCount),
+    [filteredServices, visibleCount]
+  );
 
-  // ===== Intersection Observer for Infinite Scroll =====
+  // ===== Intersection Observer =====
   const sentinelRef = useRef(null);
-
   useEffect(() => {
     if (mode !== 'infinite') return;
     const sentinel = sentinelRef.current;
@@ -139,18 +139,15 @@ const Feature = () => {
     return () => observer.disconnect();
   }, [mode, filteredServices.length]);
 
-  // ===== Categories =====
+  // ===== Categories (4 opsi saja) =====
   const categories = [
     { value: 'all', label: 'Semua Layanan' },
-    { value: 'wisata', label: 'Wisata' },
+    { value: 'informasi-publik', label: 'Informasi Publik' },
     { value: 'layanan-publik', label: 'Layanan Publik' },
-    { value: 'umkm', label: 'UMKM' },
-    { value: 'budaya', label: 'Budaya' },
-    { value: 'pendidikan', label: 'Pendidikan' },
-    { value: 'kesehatan', label: 'Kesehatan' }
+    { value: 'administrasi-pemerintah', label: 'Administrasi Pemerintah' },
   ];
 
-  // ===== Items to render (based on mode) =====
+  // ===== Items to render =====
   const itemsToRender = mode === 'pagination' ? pageItems : infiniteItems;
 
   return (
@@ -167,7 +164,7 @@ const Feature = () => {
         </div>
       </section>
 
-      {/* Controls: Search + Filter + Mode Switch */}
+      {/* Controls */}
       <section className="py-8 bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -237,7 +234,6 @@ const Feature = () => {
                 ))}
               </div>
 
-              {/* Pagination controls */}
               {mode === 'pagination' && (
                 <Pagination
                   page={page}
@@ -246,7 +242,6 @@ const Feature = () => {
                 />
               )}
 
-              {/* Infinite sentinel */}
               {mode === 'infinite' && itemsToRender.length < filteredServices.length && (
                 <div ref={sentinelRef} className="mt-10 h-10 flex items-center justify-center text-gray-400">
                   Memuat lagi...
@@ -256,12 +251,8 @@ const Feature = () => {
           ) : (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">
-                Tidak ada layanan ditemukan
-              </h3>
-              <p className="text-gray-600">
-                Coba gunakan kata kunci lain atau pilih kategori berbeda
-              </p>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Tidak ada layanan ditemukan</h3>
+              <p className="text-gray-600">Coba gunakan kata kunci lain atau pilih kategori berbeda</p>
             </div>
           )}
         </div>
