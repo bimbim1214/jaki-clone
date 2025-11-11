@@ -35,7 +35,7 @@ const Footer = () => {
                   className="h-9 w-9 object-contain" // Sesuaikan ukuran di sini
                 />
                 {/* Teks Nama */}
-                <span className="text-2xl font-bold">
+                <span className="text-2xl font-bold text-green-600">
                   Bantul<span className="font-bold text-green-600">Pedia</span>
                 </span>
               </Link>

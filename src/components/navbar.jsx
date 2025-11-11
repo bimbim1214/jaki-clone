@@ -33,8 +33,8 @@ const Navbar = () => {
                 alt="Logo BantulPedia" 
                 className="h-9 w-9 object-contain" // Sesuaikan ukuran di sini
               />
-            <div className={`text-2xl md:text-3xl font-bold transition-colors ${scrolled ? 'text-blue-600' : 'text-white'}`}>
-              Bantul<span className={scrolled ? 'text-green-600' : 'text-green-400'}>Pedia</span>
+            <div className={`text-2xl md:text-3xl font-bold transition-colors ${scrolled ? 'text-green-600' : 'text-green-600 '}`}>
+              Bantul<span className={scrolled ? 'text-green-600' : 'text-green-600'}>Pedia</span>
             </div>
           </Link>
 

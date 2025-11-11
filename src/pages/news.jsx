@@ -1,119 +1,112 @@
 // src/pages/news.jsx
-import React, { useMemo, useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Calendar, User, Eye } from 'lucide-react';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
-import NewsCard from '../components/NewsCard';
 import { newsData } from '../data/news-dummy';
-import { Search, Filter } from 'lucide-react';
 
-const PAGE_SIZE = 9;
+function formatDate(d) {
+  try {
+    return new Date(d).toLocaleDateString('id-ID', {
+      weekday: 'long', day: '2-digit', month: 'long', year: 'numeric',
+    });
+  } catch { return d; }
+}
 
-const categories = ['Semua', 'Pemerintahan', 'UMKM', 'Pendidikan', 'Kesehatan', 'Budaya', 'Wisata', 'Teknologi'];
+/* ==== Komponen kecil ==== */
+const FeaturedBig = ({ item }) => (
+  <Link to={`/berita/${item.id}`} className="relative block rounded-2xl overflow-hidden h-[380px] bg-gray-200 group">
+    <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+    <div className="absolute left-0 right-0 bottom-0 p-5 md:p-6 text-white">
+      <h2 className="text-2xl md:text-3xl font-bold leading-tight mb-3 group-hover:underline">{item.title}</h2>
+      <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm text-white/90">
+        <span className="flex items-center gap-2"><Calendar size={16} /> {formatDate(item.date)}</span>
+        <span className="flex items-center gap-2"><User size={16} /> {item.author}</span>
+        <span className="flex items-center gap-2"><Eye size={16} /> {1000 + (item.id % 300)}</span>
+      </div>
+    </div>
+  </Link>
+);
 
+const FeaturedSmall = ({ item }) => (
+  <Link to={`/berita/${item.id}`} className="relative block rounded-2xl overflow-hidden h-[180px] bg-gray-200 group">
+    <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
+    <div className="absolute left-0 right-0 bottom-0 p-4 text-white">
+      <h3 className="text-lg font-semibold leading-snug line-clamp-2 group-hover:underline">{item.title}</h3>
+      <div className="mt-2 text-[12px] text-white/90 flex items-center gap-3">
+        <span className="flex items-center gap-1"><Calendar size={14} /> {formatDate(item.date)}</span>
+      </div>
+    </div>
+  </Link>
+);
+
+const PressCard = ({ item }) => (
+  <Link to={`/berita/${item.id}`} className="bg-white rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden flex flex-col border border-gray-100">
+    <div className="h-36 bg-gray-100">
+      <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+    </div>
+    <div className="p-4 flex-1 flex flex-col">
+      <div className="text-[11px] font-medium text-teal-700 bg-teal-50 inline-block px-2 py-1 rounded mb-2">
+        {item.category}
+      </div>
+      <h4 className="font-semibold text-gray-900 text-sm leading-snug line-clamp-2">{item.title}</h4>
+      <div className="mt-auto pt-3 text-[11px] text-gray-500 flex items-center justify-between">
+        <span className="flex items-center gap-1"><Calendar size={13} /> {formatDate(item.date)}</span>
+        <span className="flex items-center gap-1"><Eye size={13} /> {500 + (item.id % 300)}</span>
+      </div>
+    </div>
+  </Link>
+);
+
+/* ==== Halaman ==== */
 const News = () => {
-  const [q, setQ] = useState('');
-  const [cat, setCat] = useState('Semua');
-  const [page, setPage] = useState(1);
-
-  const filtered = useMemo(() => {
-    const kw = q.toLowerCase();
-    let items = newsData.filter(
-      n =>
-        n.title.toLowerCase().includes(kw) ||
-        n.excerpt.toLowerCase().includes(kw) ||
-        n.content.toLowerCase().includes(kw)
-    );
-    if (cat !== 'Semua') {
-      items = items.filter(n => n.category === cat);
-    }
-    return items.sort((a, b) => new Date(b.date) - new Date(a.date));
-  }, [q, cat]);
-
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const start = (page - 1) * PAGE_SIZE;
-  const pageItems = filtered.slice(start, start + PAGE_SIZE);
+  const sorted = [...newsData].sort((a, b) => new Date(b.date) - new Date(a.date));
+  const featuredBig = sorted[0];
+  const featuredSide = sorted.slice(1, 3);
+  const pressList = sorted.slice(3);
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
 
-      {/* Header */}
-      <section className="pt-24 pb-10 bg-gradient-to-r from-indigo-600 to-teal-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold">Berita & Artikel</h1>
-          <p className="opacity-90 mt-2 max-w-2xl">
-            Kumpulan informasi terbaru seputar program, layanan, dan kegiatan di Kabupaten Bantul.
+      {/* ===== HEADER GRADIENT (tanpa ubah navbar) ===== */}
+      <section className="bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-14 text-center">
+          <h1 className="text-3xl md:text-4xl font-extrabold">Berita & Artikel</h1>
+          <p className="opacity-90 mt-3 text-base md:text-lg max-w-3xl mx-auto">
+            Jelajahi kabar terkini seputar program, layanan, dan kegiatan di Kabupaten Bantul.
           </p>
         </div>
       </section>
 
-      {/* Controls */}
-      <section className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2 flex-1">
-            <Search className="text-gray-400" size={18} />
-            <input
-              value={q}
-              onChange={(e) => { setQ(e.target.value); setPage(1); }}
-              placeholder="Cari berita..."
-              className="bg-transparent outline-none flex-1 text-gray-700 py-1"
-            />
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Filter size={18} className="text-gray-500" />
-            <select
-              value={cat}
-              onChange={(e) => { setCat(e.target.value); setPage(1); }}
-              className="px-3 py-2 border rounded-lg"
-            >
-              {categories.map(c => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
+      {/* TOP: headline besar + 2 headline kecil */}
+      <section className="pb-8 pt-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">{featuredBig && <FeaturedBig item={featuredBig} />}</div>
+            <div className="space-y-6">{featuredSide.map((it) => <FeaturedSmall item={it} key={it.id} />)}</div>
           </div>
         </div>
       </section>
 
-      {/* Grid */}
-      <section className="py-12">
+      {/* SIARAN PERS */}
+      <section className="py-2 pb-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {pageItems.length === 0 ? (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4">🧐</div>
-              <h3 className="text-xl font-semibold text-gray-800">Tidak ada berita</h3>
-              <p className="text-gray-600">Coba ubah kata kunci atau kategori.</p>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <img src="/images/logo512.png" alt="Siaran Pers" className="w-8 h-8 rounded" />
+              <h2 className="text-xl font-bold text-gray-900">SIARAN PERS</h2>
             </div>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {pageItems.map(item => (
-                  <NewsCard key={item.id} item={item} />
-                ))}
-              </div>
-
-              {/* Pagination */}
-              <div className="mt-10 flex items-center justify-center gap-2">
-                <button
-                  onClick={() => setPage(p => Math.max(1, p - 1))}
-                  className="px-3 py-2 rounded-lg border hover:bg-gray-50"
-                  disabled={page === 1}
-                >
-                  Sebelumnya
-                </button>
-                <div className="text-sm text-gray-600">
-                  Halaman <span className="font-semibold">{page}</span> dari {totalPages}
-                </div>
-                <button
-                  onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-                  className="px-3 py-2 rounded-lg border hover:bg-gray-50"
-                  disabled={page === totalPages}
-                >
-                  Berikutnya
-                </button>
-              </div>
-            </>
-          )}
+            <Link to="/berita" className="text-sm text-teal-600 hover:text-teal-700 font-semibold">
+              Selengkapnya..
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {pressList.map((item) => <PressCard item={item} key={item.id} />)}
+          </div>
         </div>
       </section>
 
